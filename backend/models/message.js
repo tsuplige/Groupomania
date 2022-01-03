@@ -34,7 +34,18 @@ async function findUserMessages(user_id){
 
 async function findComment(message_id){
   try {
-     return await query(`SELECT * FROM messages WHERE id = "${message_id}" OR parent_id = "${message_id}";`)
+    return await query(`SELECT content,messages.id,messages.datetime,parent_id,user_id,username FROM messages INNER JOIN users ON messages.user_id = users.id  WHERE parent_id = "${message_id}" ORDER BY id DESC;  `);
+    // return await query(`SELECT * FROM messages WHERE parent_id = "${message_id}";`);
+    // SELECT content,messages.id,messages.datetime,parent_id,user_id,username FROM messages INNER JOIN users ON messages.user_id = users.id  WHERE parent_id = "${message_id}" ORDER BY id DESC;
+  } catch (error) {
+      throw error;
+  }
+}
+
+async function findMessagebyId(message_id){
+  try {
+     return await query(`SELECT content,messages.id,user_id,username FROM messages inner JOIN users ON messages.user_id = users.id WHERE messages.id = "${message_id}";`)
+    //  return await query(`SELECT content,messages.id,user_id,username FROM messages WHERE id = "${message_id}";`)
   } catch (error) {
       throw error;
   }
@@ -87,5 +98,6 @@ module.exports = {
   findComment,
   changeMessage,
   supprMessage,
-  postComment
+  postComment,
+  findMessagebyId
 }

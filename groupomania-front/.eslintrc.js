@@ -14,6 +14,9 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    "semi" : ["warn", "always"]
+    "semi" : ["warn", "always"],
+    'camelcase': 'off',
+    "eqeqeq": "off",
+    "eslint no-undef": 0,
   }
 }

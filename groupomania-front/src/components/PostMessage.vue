@@ -1,9 +1,9 @@
 <template>
     <section id="message--bloc">
         <form id="Message__input">
-            <textarea id="message"></textarea>
+            <textarea v-model="BodyMessagesText" id="message"></textarea>
             <div id="submit__bar">
-                <input type="submit" id="message__button" value="Poster" />
+                <input @click="submit" type="submit" id="message__button" value="Poster" />
             </div>
         </form>
     </section>
@@ -12,21 +12,18 @@
 <script>
 import API from '../services/dataManager';
 export default {
-  name: 'Login',
+  name: 'PostMessage',
   data () {
     return {
-      BodyEmail: '',
-      BodyPassword: ''
-
+      BodyMessagesText: ''
     };
   },
   methods: {
     async submit () {
       console.log('submit');
-      console.log(this.BodyEmail);
+      console.log(this.BodyMessagesText);
       try {
-        await API.Login({ email: this.BodyEmail, password: this.BodyPassword });
-        this.$router.push({ name: 'Messages' });
+        await API.postMessage({ message_content: this.BodyMessagesText, user_id: localStorage.user_id });
       } catch (err) {
 
       }
