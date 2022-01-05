@@ -17,8 +17,12 @@ exports.createMessage = async (req, res, next) => {
 
 exports.createComment = async (req, res, next) => {
     if (req.body.message_content == "") throw (res.status(401).json({message : "message vide"}));
+    console.log(req.body.user_id, req.body.message_content, req.body.message_id)
     postComment(req.body.user_id, req.body.message_content, req.body.message_id)
-    .then (res.status(201).json({message : "commentaire posté"}))
+    .then ((infos)=>{
+        console.log("...",infos);
+        res.status(201).json({message : "commentaire posté"})
+    })
 };
 
 exports.getComment = async (req, res, next) => {

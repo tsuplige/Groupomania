@@ -51,7 +51,8 @@ export default {
       console.log('submit');
       console.log(this.BodyCommentsText);
       try {
-        await API.PostComment({ message_content: this.BodyCommentsText, user_id: localStorage.user_id, message_id: this.$route.params.id });
+        const UserInfo = localStorage.app;
+        await API.PostComment({ message_content: this.BodyCommentsText, user_id: UserInfo.user_id, message_id: this.$route.params.id });
         location.reload();
       } catch (err) {
 
@@ -65,9 +66,9 @@ export default {
         } catch (err) {
 
         }
-      } else window.alert("vous n'etes pas autorisé a supprimmer ce message !")
+      } else window.alert("vous n'etes pas autorisé a supprimmer ce message !");
       console.log(user_id);
-      console.log(localStorage.user_id)
+      console.log(localStorage.user_id);
     }
   },
   async created () {

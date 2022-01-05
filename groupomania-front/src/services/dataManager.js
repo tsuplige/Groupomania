@@ -86,7 +86,7 @@ export default class API {
       headers: makeHeaders(),
       body: JSON.stringify(data)
     };
-    console.log(data);
+    console.log("______", data);
     console.log(data.message_id);
     const result = await fetch(sourceMessage + '/' + data.message_id, requestDetails);
     const extract = await result.json();

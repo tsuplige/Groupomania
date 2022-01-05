@@ -1,5 +1,5 @@
 <template>
-   <GetComments :key="refresh" />
+   <GetComments  />
 </template>
 
 <script>

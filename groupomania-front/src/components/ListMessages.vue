@@ -55,7 +55,7 @@ export default {
         } catch (err) {
 
         }
-      } else window.alert("vous n'etes pas autorisé a supprimmer ce message !")
+      } else window.alert("vous n'etes pas autorisé a supprimmer ce message !");
       console.log(user_id);
       console.log(localStorage.user_id);
     }

@@ -37,7 +37,7 @@ export default {
         await API.Login({ email: this.BodyEmail, password: this.BodyPassword });
         this.$router.push({ name: 'Messages' });
       } catch (err) {
-        this.ErrorMessage = 'mot de passe et/ou mail incorrect'
+        this.ErrorMessage = 'mot de passe et/ou mail incorrect';
       }
     }
   }

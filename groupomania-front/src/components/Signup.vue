@@ -56,9 +56,9 @@ export default {
     validateEmail () {
       let statusInfo = false;
       const validRegex = new RegExp(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g);
-      console.log(this.BodyEmail)
-      const messageOk = ''
-      const messageNotOk = 'Invalid Email Address'
+      console.log(this.BodyEmail);
+      const messageOk = '';
+      const messageNotOk = 'Invalid Email Address';
       // this.msg.email = validRegex.test(this.BodyEmail)
       //   ? ''
       //   : 'Invalid Email Address';
@@ -69,7 +69,7 @@ export default {
         this.msg.email = messageNotOk;
         statusInfo = false;
       }
-      console.log(statusInfo)
+      console.log(statusInfo);
     }
   }
 };
