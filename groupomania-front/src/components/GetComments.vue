@@ -51,7 +51,7 @@ export default {
       console.log('submit');
       console.log(this.BodyCommentsText);
       try {
-        const UserInfo = localStorage.app;
+        const UserInfo = JSON.parse(localStorage.app);
         await API.PostComment({ message_content: this.BodyCommentsText, user_id: UserInfo.user_id, message_id: this.$route.params.id });
         location.reload();
       } catch (err) {
@@ -59,7 +59,8 @@ export default {
       }
     },
     async checkRight (user_id, MessageId) {
-      if (user_id == localStorage.user_id) {
+      const UserInfo = JSON.parse(localStorage.app)
+      if (user_id == UserInfo.user_id) {
         console.log('DELETE');
         try {
           await API.DeleteMessage({ message_id: MessageId });

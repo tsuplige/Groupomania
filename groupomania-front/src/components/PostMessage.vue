@@ -22,8 +22,10 @@ export default {
     async submit () {
       console.log('submit');
       console.log(this.BodyMessagesText);
+      const UserInfo = JSON.parse(localStorage.app);
+      console.log('____________________________________', UserInfo.user_id);
       try {
-        await API.postMessage({ message_content: this.BodyMessagesText, user_id: localStorage.user_id });
+        await API.postMessage({ message_content: this.BodyMessagesText, user_id: UserInfo.user_id });
       } catch (err) {
 
       }

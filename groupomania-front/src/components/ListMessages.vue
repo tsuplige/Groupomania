@@ -49,9 +49,6 @@ export default {
         console.log('DELETE');
         try {
           await API.DeleteMessage({ message_id: MessageId });
-          console.log('///', this.refresh);
-          this.refresh += 1;
-          console.log('///', this.refresh);
         } catch (err) {
 
         }
