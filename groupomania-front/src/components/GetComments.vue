@@ -21,7 +21,7 @@
                     <li v-for="comment in comments" :key="comment.id" class="comment--container__block">
                         <div class="comment--header">
                             <h4>{{ comment.username }}</h4>
-                            <i @click="checkRight(comment.user_id, comment.id)" class="fas fa-times deleteCom"></i>
+                            <i @click="checkRightCom(comment.user_id, comment.id)" class="fas fa-times deleteCom"></i>
                         </div>
                         <div class="comment--content">
                             <p>{{ comment.content }}</p>
@@ -59,7 +59,21 @@ export default {
       }
     },
     async checkRight (user_id, MessageId) {
-      const UserInfo = JSON.parse(localStorage.app)
+      const UserInfo = JSON.parse(localStorage.app);
+      if (user_id == UserInfo.user_id) {
+        console.log('DELETEMMMM');
+        try {
+          await API.DeleteMessage({ message_id: MessageId });
+          this.$router.push({ path: '' });
+        } catch (err) {
+
+        }
+      } else window.alert("vous n'etes pas autorisé a supprimmer ce message !");
+      console.log(user_id);
+      console.log(localStorage.user_id);
+    },
+    async checkRightCom (user_id, MessageId) {
+      const UserInfo = JSON.parse(localStorage.app);
       if (user_id == UserInfo.user_id) {
         console.log('DELETE');
         try {

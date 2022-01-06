@@ -10,18 +10,18 @@
             <span v-if="msg.email" class="ErrorMsg">{{msg.email}}</span>
         </div>
         <div class="form-group">
-            <input type="text" v-model="BodyUsername" class="form-control" id="lg_username" name="lg_username" placeholder="username" required>
-            <span v-if="msg.username" id="ErrorMsgUsername">{{msg.username}}</span>
+            <input type="text" @keyup="validateUsername" v-model="BodyUsername" class="form-control" id="lg_username" name="lg_username" placeholder="username" required>
+            <span v-if="msg.username" class="ErrorMsg">{{msg.username}}</span>
         </div>
 
         <div class="form-group">
-            <input type="password" v-model="BodyPassword" class="form-control" id="lg_password" name="lg_password" placeholder="password" required>
-            <span v-if="msg.password" id="ErrorMsgPassword">{{msg.password}}</span>
+            <input type="password" @keyup="validatePassword" v-model="BodyPassword" class="form-control" id="lg_password" name="lg_password" placeholder="password" required>
+            <span v-if="msg.password" class="ErrorMsg">{{msg.password}}</span>
         </div>
 
         <div class="form-group">
-            <input type="password" class="form-control" id="lg_password--confirm" name="lg_password" placeholder="confirm password">
-            <span v-if="msg.passwordConfirme" id="ErrorMsgPasswordConfirme">{{msg.passwordConfirme}}</span>
+            <input @keyup="validatePasswordConfirm" v-model="BodyPasswordConfirm" type="password" class="form-control" id="lg_password--confirm" name="lg_password" placeholder="confirm password">
+            <span v-if="msg.passwordConfirme" class="ErrorMsg">{{msg.passwordConfirme}}</span>
         </div>
         <input @click="submit" class="submit--button" type="submit" value="S'inscrire">
 
@@ -37,6 +37,7 @@ export default {
     return {
       BodyEmail: '',
       BodyPassword: '',
+      BodyPasswordConfirm: '',
       BodyUsername: '',
       ErrorMessage: '',
       msg: []
@@ -68,6 +69,51 @@ export default {
       } else {
         this.msg.email = messageNotOk;
         statusInfo = false;
+      }
+      console.log(statusInfo);
+    },
+    validateUsername () {
+      let statusInfo = false;
+      const validRegex = new RegExp(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u);
+      console.log(this.BodyUsername);
+      const messageOk = '';
+      const messageNotOk = 'Invalid Username';
+      // this.msg.email = validRegex.test(this.BodyEmail)
+      //   ? ''
+      //   : 'Invalid Email Address';
+      if (validRegex.test(this.BodyUsername) == true) {
+        this.msg.username = messageOk;
+        statusInfo = true;
+      } else {
+        this.msg.username = messageNotOk;
+        statusInfo = false;
+      }
+      console.log(statusInfo);
+    },
+    validatePassword () {
+      let statusInfo = false;
+      // const taille = (this.BodyPassword).lenght;
+      const messageOk = '';
+      const messageNotOk = 'Mots de passe trop court';
+      if (this.BodyPassword.length > 8) {
+        this.msg.password = messageOk;
+        statusInfo = false;
+      } else {
+        this.msg.password = messageNotOk;
+        statusInfo = true;
+      }
+      console.log(statusInfo);
+    },
+    validatePasswordConfirm () {
+      let statusInfo = false;
+      const messageOk = '';
+      const messageNotOk = 'les Mots de passe doivent être identique';
+      if (this.BodyPassword != this.BodyPasswordConfirm) {
+        this.msg.passwordConfirme = messageNotOk;
+        statusInfo = false;
+      } else {
+        this.msg.passwordConfirme = messageOk;
+        statusInfo = true;
       }
       console.log(statusInfo);
     }
