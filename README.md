@@ -1,4 +1,4 @@
-# Supligeonthomas_7_02122021
+# GROUPOMANIA - création d'un réseau social d'entreprise
 
 ### pour tester et lancer le projet :
 
